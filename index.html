@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storyverse</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(-45deg, #1a1a1a, #3a0f0f, #0f3a1a, #1a1a1a);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: #fff;
+  transition: background 0.6s, color 0.6s;
+}
+@keyframes gradientBG {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
+body.light {
+  background: linear-gradient(-45deg, #f0f0f0, #ffdada, #d6ffd6, #f0f0f0);
+  color: #111;
+}
+.tab-menu {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  background: rgba(0,0,0,0.7);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.tab-menu button {
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 15px 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  flex: 0 0 auto;
+}
+.tab-menu button:hover, .tab-menu button.active {
+  color: #ff5555;
+}
+.tab-content {
+  display: none;
+  padding: 100px 20px 60px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.tab-content.active {
+  display: block;
+}
+.card {
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s, box-shadow 0.3s, opacity 0.6s;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.card img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+.card h3 {
+  margin: 10px 0;
+  text-align: center;
+}
+.card p {
+  line-height: 1.5;
+  text-align: justify;
+}
+.btn-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: #ff5555;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+.btn-link:hover {
+  background: #ff2222;
+}
+footer {
+  text-align: center;
+  padding: 30px;
+  background: rgba(0,0,0,0.7);
+  margin-top: 40px;
+}
+.social-divider {
+  border: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.3);
+  margin: 10px 0;
+}
+
+/* кнопка темы */
+.theme-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  font-size: 22px;
+  background: rgba(0,0,0,0.6);
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+}
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.1);
+}
+</style>
+</head>
+<body>
+
+<div class="tab-menu">
+  <button class="tab-link active" data-tab="home">Главная</button>
+  <button class="tab-link" data-tab="stories">Рассказы</button>
+  <button class="tab-link" data-tab="social">Соцсети</button>
+  <button class="tab-link" data-tab="announcements">Анонсы</button>
+  <button class="tab-link" data-tab="contact">Связаться</button>
+</div>
+
+<!-- Главная -->
+<div id="home" class="tab-content active">
+  <h1 style="text-align:center;">Добро пожаловать в Storyverse!</h1>
+  <p style="text-align:center;">
+    Здесь вы найдете мои рассказы и анонсы. Погрузитесь в мир историй, интриги и неожиданных поворотов.
+  </p>
+
+  <!-- Кнопка темы -->
+  <button class="theme-toggle" id="themeToggle">🌙</button>
+</div>
+
+<!-- Рассказы -->
+<div id="stories" class="tab-content">
+  <h2>Мои рассказы</h2>
+  <div class="card">
+    <img src="https://www.wattpad.com/cover/403500597.jpg" alt="Обложка рассказа The Bloody City">
+    <h3>Обычная жизнь Хофилиона</h3>
+    <p>Обычный парень по имени Хофилион ведёт тихую, незаметную жизнь, пока однажды его не останавливает Юра Хой.  
+    С этого момента начинается цепочка событий, которые меняют всё.</p>
+    <a href="https://www.wattpad.com/story/403500597?utm_source=android&utm_medium=link&utm_content=share_reading&wp_page=reading_part_end&wp_uname=FX_HoFiLiOn" class="btn-link" target="_blank">Читать на Wattpad</a>
+  </div>
+</div>
+
+<!-- Соцсети -->
+<div id="social" class="tab-content">
+  <h2 style="text-align:center; margin-bottom:40px;">Соц сети автора</h2>
+  <div class="social-grid" style="display:flex; flex-direction:column; gap:20px;">
+
+    <div class="social-card" style="display:flex; align-items:center; gap:15px; padding:15px; background:rgba(255,255,255,0.1); border-radius:10px;">
+      <img src="https://a.imgfoto.host/2025/10/31/1000009891.jpeg" alt="Рассказы" style="width:80px; height:80px; border-radius:50%;">
+      <div style="flex:1;">
+        <a href="https://t.me/razkazii" target="_blank" class="btn-link" style="display:inline-block; margin-bottom:5px;">
+          Рассказы <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" style="width:18px; vertical-align:middle; margin-left:5px;">
+        </a>
+        <p style="margin:0; color:#ddd; font-size:14px;">Канал с моими рассказами и новостями.</p>
+      </div>
+    </div>
+    <hr class="social-divider">
+
+    <div class="social-card" style="display:flex; align-items:center; gap:15px; padding:15px; background:rgba(255,255,255,0.1); border-radius:10px;">
+      <img src="https://a.imgfoto.host/2025/10/31/1000009892.jpeg" alt="Maps for SSB2" style="width:80px; height:80px; border-radius:50%;">
+      <div style="flex:1;">
+        <a href="https://t.me/mapsinssb2byhofilion" target="_blank" class="btn-link" style="display:inline-block; margin-bottom:5px;">
+          Maps for SSB2 by HoFiLiOn <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" style="width:18px; vertical-align:middle; margin-left:5px;">
+        </a>
+        <p style="margin:0; color:#ddd; font-size:14px;">Канал с картами и контентом для SSB2.</p>
+      </div>
+    </div>
+    <hr class="social-divider">
+
+    <div class="social-card" style="display:flex; align-items:center; gap:15px; padding:15px; background:rgba(255,255,255,0.1); border-radius:10px;">
+      <img src="https://a.imgfoto.host/2025/10/31/1000009890.jpeg" alt="FX | HoFiLiOn" style="width:80px; height:80px; border-radius:50%;">
+      <div style="flex:1;">
+        <a href="https://www.youtube.com/@HoFiLiOn" target="_blank" class="btn-link" style="display:inline-block; margin-bottom:5px;">
+          FX | HoFiLiOn <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" style="width:18px; vertical-align:middle; margin-left:5px;">
+        </a>
+        <p style="margin:0; color:#ddd; font-size:14px;">Мой YouTube канал с видео и контентом.</p>
+      </div>
+    </div>
+    <hr class="social-divider">
+
+    <div class="social-card" style="display:flex; align-items:center; gap:15px; padding:15px; background:rgba(255,255,255,0.1); border-radius:10px;">
+      <img src="https://a.imgfoto.host/2025/10/31/1000009890.jpeg" alt="Кладовка HoFiLiOn'a" style="width:80px; height:80px; border-radius:50%;">
+      <div style="flex:1;">
+        <a href="https://t.me/kladovkahofila" target="_blank" class="btn-link" style="display:inline-block; margin-bottom:5px;">
+          Кладовка HoFiLiOn'a <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" style="width:18px; vertical-align:middle; margin-left:5px;">
+        </a>
+        <p style="margin:0; color:#ddd; font-size:14px;">Канал с дополнительными материалами и файлами.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Анонсы -->
+<div id="announcements" class="tab-content">
+  <h2>Анонсы будущих рассказов</h2>
+  <div class="card">
+    <img src="https://iimg.su/i/nPVe0a" alt="The Bloody City">
+    <img src="https://a.imgfoto.host/2025/10/30/1000009821.png" alt="Дополнительное изображение">
+    <h3>The Bloody City</h3>
+    <p>Нью-Йорк никогда не был безопасным.
+В тени улиц появился убийца в маске клоуна. Он мстит тем, кто когда-то издевался над ним, превращая старые обиды в кровавый спектакль.
+Детектив Брайан Павальски и его напарник Дэниел Торрес идут по следу, но каждый шаг ведёт их глубже в ловушку. В этом городе нет случайных жертв и случайных действий — здесь всё имеет значение.
+«Кровавый город» — рассказ и история, вдохновлённая игрой "The Happyhills Homicide",где месть, страх и детективная интрига переплетаются в одну смертельную игру.</p>
+    <p><strong>Первая глава выйдет 10 ноября 2025 года в 20:00 по МСК.</strong></p>
+  </div>
+</div>
+
+<!-- Связаться -->
+<div id="contact" class="tab-content">
+  <h2 style="text-align:center; margin-bottom:30px;">Связаться со мной</h2>
+  <div class="card" style="text-align:center; max-width:300px; margin:0 auto;">
+    <a href="https://t.me/HoFiLiOnclkc" target="_blank" style="text-decoration:none; color:#fff;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" style="width:60px; margin-bottom:15px;">
+      <h3>Написать в Telegram</h3>
+      <p>Свяжись со мной напрямую через мой аккаунт Telegram.</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 Storyverse
+</footer>
+
+<script>
+const tabs = document.querySelectorAll('.tab-link');
+const contents = document.querySelectorAll('.tab-content');
+function showCards(content) {
+  const cards = content.querySelectorAll('.card');
+  cards.forEach((c, i) => { setTimeout(() => c.classList.add('visible'), i*100); });
+}
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    contents.forEach(c => { 
+      c.classList.remove('active'); 
+      c.querySelectorAll('.card').forEach(card => card.classList.remove('visible')); 
+    });
+    tab.classList.add('active');
+    const activeContent = document.getElementById(tab.dataset.tab);
+    activeContent.classList.add('active');
+    showCards(activeContent);
+
+    // показывать кнопку только на главной
+    const themeBtn = document.getElementById('themeToggle');
+    if (tab.dataset.tab === 'home') {
+      themeBtn.style.display = 'flex';
+    } else {
+      themeBtn.style.display = 'none';
+    }
+  });
+});
+showCards(document.querySelector('.tab-content.active'));
+
+// переключение темы
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('light');
+  themeToggle.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+});
+</script>
+
+</body>
+</html>
